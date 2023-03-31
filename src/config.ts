@@ -7,18 +7,18 @@ Do not write explanations.
 export const config = {
   openai: {
     apiKey: getEnvVariable("OPENAI_API_KEY"),
-    organization: getEnvVariable("OPENAI_ORG_ID"),
+    organization: process.env["OPENAI_ORG_ID"] || undefined,
   },
   systemMessage,
   message: {
-      model: "gpt-3.5-turbo",
-      temperature: 0.0,
-      max_tokens: 100,
-      top_p: 1.0,
-      frequency_penalty: 0.2,
-      presence_penalty: 0.0,
-      stop: ["\n"],
-  }
+    model: "gpt-3.5-turbo",
+    temperature: 0.0,
+    max_tokens: 100,
+    top_p: 1.0,
+    frequency_penalty: 0.2,
+    presence_penalty: 0.0,
+    stop: ["\n"],
+  },
 };
 
 function getEnvVariable(key: string): string {
