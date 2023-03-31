@@ -2,6 +2,8 @@ import { handleError, NLTError } from "./error";
 import { getTerminalCommand } from "./openapi";
 
 (async () => await main())().catch((error: unknown) => handleError(error));
+process.on("unhandledRejection", handleError);
+process.on("uncaughtException", handleError);
 
 async function main() {
   const prompt = parseArgs();
