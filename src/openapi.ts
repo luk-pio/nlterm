@@ -5,7 +5,7 @@ import {
   CreateChatCompletionResponse,
   OpenAIApi,
 } from "openai";
-import { config } from "./config";
+import { config } from "./config/config";
 import { NLTError } from "./error";
 
 const openai = new OpenAIApi(new Configuration(config.openai));
