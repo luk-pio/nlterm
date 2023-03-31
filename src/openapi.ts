@@ -21,10 +21,7 @@ export async function getTerminalCommand(prompt: string): Promise<string> {
     throw error;
   }
 
-  return validateResponse(
-    // todo
-    response as AxiosResponse<CreateChatCompletionResponse>
-  );
+  return validateResponse(response as AxiosResponse<CreateChatCompletionResponse>);
 }
 
 const getChatCompletionRequest = (
@@ -41,7 +38,7 @@ const getChatCompletionRequest = (
 });
 
 const validateResponse = (
-  response: AxiosResponse<CreateChatCompletionResponse, any> | undefined
+  response: AxiosResponse<CreateChatCompletionResponse> | undefined
 ): string => {
   const command = response?.data?.choices?.[0]?.message?.content;
   if (!command?.length) {
