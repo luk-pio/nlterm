@@ -1,5 +1,5 @@
 import { handleError, NLTError } from "./error";
-import { getTerminalCommand } from "./openapi";
+import { getTerminalCommand } from "./openai";
 
 (async () => await main())().catch((error: unknown) => handleError(error));
 process.on("unhandledRejection", handleError);
