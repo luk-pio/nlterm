@@ -2,38 +2,38 @@
 
 `nlterm` is a command-line tool that translates natural language descriptions into terminal commands. The program takes in a natural language description of a terminal command and outputs the corresponding terminal command to stdout. Under the hood, it leverages the OpenAI API to perform the translations.
 
-## 📚 Table of Contents
+## Table of Contents
 
-* [🔑 Prerequisites](#---prerequisites)
-* [🛠️ Installation](#----installation)
-* [🎯 Usage](#---usage)
-* [🌎 Enabling Globally](#---enabling-globally)
-* [👨‍💻 Executing terminal commands](#------executing-terminal-commands)
+* [Prerequisites](#---prerequisites)
+* [Installation](#----installation)
+* [Usage](#---usage)
+* [Enabling Globally](#---enabling-globally)
+* [Executing terminal commands](#------executing-terminal-commands)
 * [Setting the API Key](#setting-the-api-key)
 * [Examples](#examples)
 * [Contributing](#contributing)
 * [License](#license)
 
-## 🔑 Prerequisites
+## Prerequisites
 
 Before you start, you'll need to obtain an OpenAI API key 🔐. You can get one by visiting this URL: https://platform.openai.com/account/api-keys
 See [Setting the API Key](#setting-the-api-key) for more information.
 
-## 🛠️ Installation
+## Installation
 
 Simply download one of the binaries from the release page.
 
-## 🎯 Usage
+## Usage
 
 Using `nlterm` is simple:
 
 ```bash
-nlterm "I want to do something but can't remember the command"
+nlterm "what I want to do but can't remember the command for"
 ```
 
 The program will then write the translated terminal command to stdout.
 
-## 🌎 Enabling Globally
+## Enabling Globally
 If you want the command to be available globally, you can move the binary to a directory that's in your `PATH` environment variable.
 For example, `~/.local/bin`:
 
@@ -41,7 +41,7 @@ For example, `~/.local/bin`:
 mv nlterm ~/.local/bin
 ```
 
-## 👨‍💻 Executing terminal commands
+## Executing terminal commands
 
 If you want to execute the translated terminal command, you can add the following shell function to your shell profile file (`~/.bashrc`, `~/.bash_profile`, or `~/.zshrc`):
 
@@ -53,7 +53,7 @@ nlt() {
 }
 ```
 
-## 🔐 Setting the API Key
+## Setting the API Key
 
 In order to use `nlterm`, you'll need to set your OpenAI API key as an environment variable in your shell environment. Here's how:
 
@@ -69,7 +69,7 @@ Replace `your_api_key` with your actual API key obtained from OpenAI 🔑.
 4. Save and close the file.
 5. Restart your terminal or run `source ~/.bashrc`, `source ~/.bash_profile`, or `source ~/.zshrc`, depending on which file you edited.
 
-## 📖 Examples
+## Examples
 
 ```bash
 $ nlterm "create a new directory called projects"
@@ -82,10 +82,10 @@ $ nlterm "list all files in the s3 bucket 'my-bucket' with the extension .json"
 aws s3 ls s3://my-bucket --recursive | grep ".json$" | awk '{print $4}'
 ```
 
-## 🤝 Contributing
+## Contributing
 
 You are welcome to contribute to `nlterm` 🎉. To get started, please fork the repository and submit a pull request with your proposed changes.
 
-## 📄 License
+## License
 
 `nlterm` is released under the MIT License 📜. See [LICENSE](LICENSE) for more information.
