@@ -15,7 +15,7 @@ async function main() {
 function parseArgs(): string {
   const prompt = process.argv[2];
 
-  if (!prompt.length) {
+  if (!(prompt?.length)) {
     throw new NLTError(
       "Missing prompt value. Provide the prompt string as the first argument",
       1
