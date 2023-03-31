@@ -8,8 +8,8 @@
     "start": "npm run build && node dist/index.js",
     "build": "npm run clean && rollup -c",
     "watch": "rollup -c -w",
-    "package": "npm run build && pkg package.json -C -o nlterm --no-bytecode",
-    "clean": "rm -rf dist nlterm",
+    "package": "npm run build && mkdir -p bin && pkg package.json -C -o bin/nlterm --no-bytecode",
+    "clean": "rm -rf dist bin",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Lukasz Piotrak",
