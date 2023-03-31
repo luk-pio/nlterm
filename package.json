@@ -6,9 +6,9 @@
   "bin": "dist/index.cjs",
   "scripts": {
     "start": "npm run build && node dist/index.js",
-    "build": "npm run clean && rollup -c",
+    "bundle": "npm run clean && rollup -c",
     "watch": "rollup -c -w",
-    "package": "npm run build && mkdir -p bin && pkg -t node18-linux-arm64,node18-linux-x64,node18-macos-arm64,node18-macos-x64 package.json -C -o bin/nlterm --no-bytecode",
+    "build": "npm run bundle && mkdir -p bin && pkg -t node18-linux-arm64,node18-linux-x64,node18-macos-arm64,node18-macos-x64 package.json -C -o bin/nlterm --no-bytecode",
     "clean": "rm -rf dist bin",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
