@@ -1,6 +1,6 @@
 # 🤖 nlterm 🤖
 
-`nlterm` is a command-line tool that translates natural language descriptions into terminal commands. The program takes in a natural language description of a terminal command and outputs the corresponding terminal command to stdout. Under the hood, it leverages the OpenAI API to perform the translations.
+`nlterm` is a command-line tool that translates natural language descriptions into terminal commands. Just tell `nlterm` what you want to do in plain English, and watch it unleash the power of the OpenAI API to turn your words into executable commands. It's like having an AI-powered rubber duck 🦆.
 
 ## Table of Contents
 
