@@ -14,7 +14,7 @@ export const config = {
   },
   systemMessage,
   message: {
-    model: "gpt-3.5-turbo",
+    model: process.env["NLTERM_MODEL"] || "gpt-3.5-turbo",
     temperature: 0.0,
     max_tokens: 3000,
     top_p: 1.0,
