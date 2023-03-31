@@ -1,6 +1,6 @@
 {
   "name": "nlterm",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A natural language terminal",
   "type": "module",
   "bin": "dist/index.cjs",
