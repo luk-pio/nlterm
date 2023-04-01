@@ -38,6 +38,12 @@ nlterm "what I want to do but can't remember the command for"
 
 The program will then write the translated terminal command to stdout.
 
+Flags:
+```
+--debug:      Provides extra debugging info
+-h, --help:   Prints the help docs
+```
+
 ## Enabling Globally
 If you want the command to be available globally, you can move the binary to a directory that's in your `PATH` environment variable.
 For example, `~/.local/bin`:
