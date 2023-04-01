@@ -1,5 +1,5 @@
 import { config } from "../config/config";
-import { logDebug } from "../error";
+import { logDebug } from "../logDebug";
 
 export class FetchError extends Error {
   constructor(message: string, cause?: Error) {

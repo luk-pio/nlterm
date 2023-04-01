@@ -1,6 +1,7 @@
 import minimist from "minimist";
 import { config } from "./config/config";
-import { handleError, logDebug, NLTError } from "./error";
+import { handleError, NLTError } from "./error";
+import { logDebug } from "./logDebug";
 import { OpenaiApi } from "./openai/openai";
 
 (async () => await main())().catch((error: unknown) => handleError(error));

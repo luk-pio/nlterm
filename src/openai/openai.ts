@@ -1,11 +1,11 @@
 import { config } from "../config/config";
 import {
   NLTError,
-  logDebug,
   networkError,
   unexpectedError,
   unknownError,
 } from "../error";
+import { logDebug } from "../logDebug";
 import {
   ChatCompletionConfig,
   ChatCompletionRequest,

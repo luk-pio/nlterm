@@ -1,5 +1,10 @@
 import { config } from "./config/config";
 
+export const USER_ERROR_CODE = 1;
+export const UNEXPECTED_ERROR_CODE = 2;
+export const NETWORK_ERROR_CODE = 124;
+const RED = "\x1b[31m";
+
 export class NLTError extends Error {
   public readonly code: number;
   constructor(message: string, code: number, cause?: Error) {
@@ -40,15 +45,6 @@ export function networkError(
   );
 }
 
-export const USER_ERROR_CODE = 1;
-export const UNEXPECTED_ERROR_CODE = 2;
-export const NETWORK_ERROR_CODE = 124;
-const RED = "\x1b[31m";
-const YELLOW = "\x1B[33m"
-
-export function logDebug(message: string) {
-  console.log(YELLOW, 'DEBUG: ', message);
-}
 
 export function handleError(error: unknown) {
   const message = error instanceof Error ? error.message : "Unknown Error";
