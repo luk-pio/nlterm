@@ -6,7 +6,7 @@
   "bin": "dist/index.cjs",
   "scripts": {
     "start": "npm run build && node dist/index.js",
-    "bundle": "npm run clean && rollup -c",
+    "bundle": "npm run clean && rollup -c && chmod u+x dist/index.cjs",
     "watch": "rollup -c -w",
     "build": "npm run bundle && mkdir -p bin && pkg -t node18-linux-arm64,node18-linux-x64,node18-macos-arm64,node18-macos-x64 package.json -C -o bin/nlterm --no-bytecode",
     "clean": "rm -rf dist bin",
@@ -26,6 +26,7 @@
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.15.11",
     "rollup": "^3.20.2",
+    "rollup-plugin-preserve-shebang": "^1.0.1",
     "tslib": "^2.5.0",
     "typescript": "^5.0.3"
   }
