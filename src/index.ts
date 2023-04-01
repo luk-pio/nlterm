@@ -1,6 +1,7 @@
+#!/usr/bin/env node
 import minimist from "minimist";
 import { config } from "./config/config";
-import { handleError, NLTError } from "./error";
+import { handleError, USER_ERROR_CODE } from "./error";
 import { logDebug } from "./logDebug";
 import { OpenaiApi } from "./openai/openai";
 
@@ -43,12 +44,22 @@ function parseArgs(): Args {
   const { _: positional, debug } = args;
   const prompt = positional[0];
 
-  if (!prompt?.length) {
-    throw new NLTError(
-      "Missing prompt value. Provide the prompt string as the first argument",
-      1
-    );
+  if (!prompt?.length || args.h) {
+    printHelp();
+    process.exit(USER_ERROR_CODE);
   }
 
   return { prompt, debug };
+}
+
+function printHelp() {
+  console.log(`
+  Usage: nlterm prompt [options]
+
+  a command-line tool for translating natural language descriptions into terminal commands
+
+  Options:
+    -h, --help          output usage information 
+    --debug             provides extra debugging info
+  `);
 }
