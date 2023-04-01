@@ -1,20 +1,58 @@
+import { config } from "./config/config";
+
+export const USER_ERROR_CODE = 1;
+export const UNEXPECTED_ERROR_CODE = 2;
+export const NETWORK_ERROR_CODE = 124;
+const RED = "\x1b[31m";
+
 export class NLTError extends Error {
   public readonly code: number;
-  constructor(message: string, code: number) {
-    super(message);
+  constructor(message: string, code: number, cause?: Error) {
+    super(message, {cause});
+    this.cause = cause;
     this.code = code;
   }
 }
 
-const FATAL_ERROR_CODE = 128
+export function unknownError(
+  cause?: Error,
+  message: string = "An unknown error ocurred"
+) {
+  return new NLTError(message, UNEXPECTED_ERROR_CODE, cause);
+}
 
-export const handleError = (error: unknown) => {
-    let message = 'Unknown Error', code = FATAL_ERROR_CODE;
-    if (error instanceof Error) {
-        message = error.message;
-    }
-    if (error instanceof NLTError) code = error.code
-    const red = '\x1b[31m'
-    console.error(red, `Error: ${message}`);
-    process.exit(code)
+export function unexpectedError(
+  message: string,
+  cause?: Error | unknown,
+  prefix: string = "An unexpected error occurred: "
+) {
+  return new NLTError(
+    prefix + message,
+    UNEXPECTED_ERROR_CODE,
+    cause instanceof Error ? cause : undefined
+  );
+}
+
+export function networkError(
+  message: string,
+  cause?: Error | unknown,
+  prefix: string = "A network error occurred: "
+) {
+  return new NLTError(
+    prefix + message,
+    NETWORK_ERROR_CODE,
+    cause instanceof Error ? cause : undefined
+  );
+}
+
+
+export function handleError(error: unknown) {
+  const message = error instanceof Error ? error.message : "Unknown Error";
+  const code = error instanceof NLTError ? error.code : UNEXPECTED_ERROR_CODE;
+
+  console.error(RED, message);
+  if (config.debug && error instanceof NLTError) 
+    console.error(error);
+  
+  process.exit(code);
 }
