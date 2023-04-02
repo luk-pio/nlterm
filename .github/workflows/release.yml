@@ -1,0 +1,35 @@
+on:
+  push:
+    branches:
+      - main
+name: release
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          release-type: node
+          package-name: test-release-please
+      - uses: actions/checkout@v2
+        if: ${{ steps.release.outputs.release_created }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org'
+        if: ${{ steps.release.outputs.release_created }}
+      - run: npm ci
+        if: ${{ steps.release.outputs.release_created }}
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - uses: d1ceward/draft-assets-release-action@v2
+        if: ${{ steps.release.outputs.release_created }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: |
+            bin/nlterm-linux-arm64
+            bin/nlterm-linux-x64
+            bin/nlterm-macos-arm64
+            bin/nlterm-macos-x64
