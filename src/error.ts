@@ -6,14 +6,13 @@ export class NLTError extends Error {
   public readonly code: number;
   constructor(message: string, code: number, cause?: Error) {
     super(message, {cause});
-    this.cause = cause;
     this.code = code;
   }
 }
 
 export function unknownError(
   cause?: Error,
-  message: string = "An unknown error ocurred"
+  message = "An unknown error ocurred"
 ) {
   return new NLTError(message, EXIT_CODE.UNEXPECTED_ERROR, cause);
 }
@@ -21,7 +20,7 @@ export function unknownError(
 export function unexpectedError(
   message: string,
   cause?: Error | unknown,
-  prefix: string = "An unexpected error occurred: "
+  prefix = "An unexpected error occurred: "
 ) {
   return new NLTError(
     prefix + message,
@@ -33,7 +32,7 @@ export function unexpectedError(
 export function networkError(
   message: string,
   cause?: Error | unknown,
-  prefix: string = "A network error occurred: "
+  prefix = "A network error occurred: "
 ) {
   return new NLTError(
     prefix + message,
