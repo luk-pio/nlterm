@@ -30,23 +30,30 @@
     "watch": "rollup -c -w",
     "build": "npm run bundle && mkdir -p bin && pkg -t node18-linux-arm64,node18-linux-x64,node18-macos-arm64,node18-macos-x64 package.json -C -o bin/nlterm --no-bytecode",
     "clean": "rm -rf dist bin",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --collectCoverageFrom='src/**/!(__test__)/*.ts' --collectCoverage"
   },
   "dependencies": {
     "minimist": "^1.2.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-typescript": "^7.21.4",
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^11.0.0",
+    "@types/jest": "^29.5.0",
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.15.11",
+    "jest": "^29.5.0",
+    "pkg": "^5.8.1",
     "rollup": "^3.20.2",
     "rollup-plugin-preserve-shebang": "^1.0.1",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
     "tslib": "^2.5.0",
-    "typescript": "^5.0.3",
-    "pkg": "^5.8.1"
+    "typescript": "^5.0.3"
   },
   "os": [
     "darwin",
