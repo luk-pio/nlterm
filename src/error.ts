@@ -1,9 +1,6 @@
+import { COLOR } from "./command/colors";
+import {EXIT_CODE} from "./command/exitCodes";
 import { config } from "./config/config";
-
-export const USER_ERROR_CODE = 1;
-export const UNEXPECTED_ERROR_CODE = 2;
-export const NETWORK_ERROR_CODE = 124;
-const RED = "\x1b[31m";
 
 export class NLTError extends Error {
   public readonly code: number;
@@ -18,7 +15,7 @@ export function unknownError(
   cause?: Error,
   message: string = "An unknown error ocurred"
 ) {
-  return new NLTError(message, UNEXPECTED_ERROR_CODE, cause);
+  return new NLTError(message, EXIT_CODE.UNEXPECTED_ERROR, cause);
 }
 
 export function unexpectedError(
@@ -28,7 +25,7 @@ export function unexpectedError(
 ) {
   return new NLTError(
     prefix + message,
-    UNEXPECTED_ERROR_CODE,
+    EXIT_CODE.UNEXPECTED_ERROR,
     cause instanceof Error ? cause : undefined
   );
 }
@@ -40,7 +37,7 @@ export function networkError(
 ) {
   return new NLTError(
     prefix + message,
-    NETWORK_ERROR_CODE,
+    EXIT_CODE.NETWORK_ERROR,
     cause instanceof Error ? cause : undefined
   );
 }
@@ -48,9 +45,9 @@ export function networkError(
 
 export function handleError(error: unknown) {
   const message = error instanceof Error ? error.message : "Unknown Error";
-  const code = error instanceof NLTError ? error.code : UNEXPECTED_ERROR_CODE;
+  const code = error instanceof NLTError ? error.code : EXIT_CODE.UNEXPECTED_ERROR;
 
-  console.error(RED, message);
+  console.error(COLOR.RED, message);
   if (config.debug && error instanceof NLTError) 
     console.error(error);
   

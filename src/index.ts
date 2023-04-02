@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import minimist from "minimist";
 import { config } from "./config/config";
-import { handleError, USER_ERROR_CODE } from "./error";
+import { handleError } from "./error";
 import { logDebug } from "./logDebug";
 import { OpenaiApi } from "./openai/openai";
+import { parseArgs } from "./command/parseArgs";
 
 (async () => await main())().catch((error: unknown) => handleError(error));
 process.on("unhandledRejection", handleError);
@@ -12,8 +12,8 @@ process.removeAllListeners("warning");
 
 async function main() {
   const { prompt, debug } = parseArgs();
-  if (debug) setDebug();
   if (debug) {
+    setDebug();
     logDebug("Using the following config values:");
     logDebug(JSON.stringify(config, null, 2));
   }
@@ -30,36 +30,4 @@ async function main() {
 
 function setDebug() {
   config.debug = true;
-}
-
-type Args = { prompt: string; debug: boolean };
-function parseArgs(): Args {
-  const args = minimist(process.argv.slice(2), {
-    boolean: ["help", "debug"],
-    alias: {
-      h: "help",
-    },
-  });
-
-  const { _: positional, debug } = args;
-  const prompt = positional[0];
-
-  if (!prompt?.length || args.h) {
-    printHelp();
-    process.exit(USER_ERROR_CODE);
-  }
-
-  return { prompt, debug };
-}
-
-function printHelp() {
-  console.log(`
-  Usage: nlterm prompt [options]
-
-  a command-line tool for translating natural language descriptions into terminal commands
-
-  Options:
-    -h, --help          output usage information 
-    --debug             provides extra debugging info
-  `);
 }

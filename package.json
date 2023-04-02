@@ -30,7 +30,7 @@
     "watch": "rollup -c -w",
     "build": "npm run bundle && mkdir -p bin && pkg -t node18-linux-arm64,node18-linux-x64,node18-macos-arm64,node18-macos-x64 package.json -C -o bin/nlterm --no-bytecode",
     "clean": "rm -rf dist bin",
-    "test": "jest --collectCoverageFrom='src/**/!(__test__)/*.ts' --collectCoverage"
+    "test": "jest"
   },
   "dependencies": {
     "minimist": "^1.2.8"

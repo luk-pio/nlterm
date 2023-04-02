@@ -1,4 +1,5 @@
-const YELLOW = "\x1B[33m"
+import { COLOR } from "./command/colors";
+
 export function logDebug(message: string) {
-  console.log(YELLOW, 'DEBUG: ', message);
+  console.log(COLOR.YELLOW, 'DEBUG: ', message);
 }

@@ -11,8 +11,8 @@
     "noEmitOnError": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
-    "declarationDir": "dist/types",
+    "declarationDir": "types"
   },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["./src/**/*.ts",],
+  "exclude": [ "./src/__test__/**/*", "node_modules", "dist"]
 }
