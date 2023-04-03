@@ -1,11 +1,11 @@
 import { COLOR } from "./command/colors";
-import {EXIT_CODE} from "./command/exitCodes";
+import { EXIT_CODE } from "./command/exitCodes";
 import { config } from "./config/config";
 
 export class NLTError extends Error {
   public readonly code: number;
   constructor(message: string, code: number, cause?: Error) {
-    super(message, {cause});
+    super(message, { cause });
     this.code = code;
   }
 }
@@ -41,14 +41,13 @@ export function networkError(
   );
 }
 
-
 export function handleError(error: unknown) {
   const message = error instanceof Error ? error.message : "Unknown Error";
-  const code = error instanceof NLTError ? error.code : EXIT_CODE.UNEXPECTED_ERROR;
+  const code =
+    error instanceof NLTError ? error.code : EXIT_CODE.UNEXPECTED_ERROR;
 
   console.error(COLOR.RED, message);
-  if (config.debug && error instanceof NLTError) 
-    console.error(error);
-  
+  if (config.debug && error instanceof NLTError) console.error(error);
+
   process.exit(code);
 }
