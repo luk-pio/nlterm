@@ -21,12 +21,11 @@ See [Setting the API Key](#setting-the-api-key) for more information.
 
 ## Installation
 
-Simply download one of the binaries from the release page or clone the project and run: 
+Simply download one of the binaries from the release page or install as a global npm package: 
 (requires node 18)
 ```bash
-npm i && npm run build
+npm i -g nlterm
 ```
-Choose the binary for your platform from the `bin` directory.
 
 ## Usage
 
