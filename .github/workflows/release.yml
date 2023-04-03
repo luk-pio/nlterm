@@ -5,39 +5,27 @@ on:
 
 name: release
 jobs:
+
+  test:
+    uses: ./.github/workflows/test.yml
+
   release:
+    needs: test
     runs-on: ubuntu-latest
     steps:
+
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
           release-type: node
           package-name: test-release-please
 
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          registry-url: 'https://registry.npmjs.org'
-
-      - run: npm ci
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Run tests
-        run: npm test
-
       - run: npm publish
+        if: ${{ steps.release.outputs.release_created }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
-      - uses: d1ceward/draft-assets-release-action@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          files: |
-            bin/nlterm-linux-arm64
-            bin/nlterm-linux-x64
-            bin/nlterm-macos-arm64
-            bin/nlterm-macos-x64
+      - run: node dist/upload--to-release.cjs bin/nlterm*
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
