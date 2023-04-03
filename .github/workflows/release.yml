@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - main
+
 name: release
 jobs:
   release:
@@ -12,18 +13,32 @@ jobs:
         with:
           release-type: node
           package-name: test-release-please
+
       - uses: actions/checkout@v2
         if: ${{ steps.release.outputs.release_created }}
+
       - uses: actions/setup-node@v3
         with:
           node-version: 18
           registry-url: 'https://registry.npmjs.org'
         if: ${{ steps.release.outputs.release_created }}
+
       - run: npm ci
         if: ${{ steps.release.outputs.release_created }}
+
+      - name: Lint
+        run: npm run lint
+        if: ${{ steps.release.outputs.release_created }}
+
+      - name: Run tests
+        run: npm test
+        if: ${{ steps.release.outputs.release_created }}
+
       - run: npm publish
+        if: ${{ steps.release.outputs.release_created }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
       - uses: d1ceward/draft-assets-release-action@v2
         if: ${{ steps.release.outputs.release_created }}
         with:
