@@ -1,7 +1,7 @@
 name: Test feature branch
 
 on: 
-  push:
+  pull_request:
     branches:
       - main
 
