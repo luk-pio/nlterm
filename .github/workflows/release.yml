@@ -15,7 +15,6 @@ jobs:
           package-name: test-release-please
 
       - uses: actions/checkout@v2
-        if: ${{ steps.release.outputs.release_created }}
 
       - uses: actions/setup-node@v3
         with:
