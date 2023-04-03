@@ -1,12 +1,10 @@
 name: test
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_call:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
