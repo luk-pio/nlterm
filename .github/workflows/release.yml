@@ -2,10 +2,15 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      should_release:
+        description: "Should this dispatch run steps for creating a release"
+        type: boolean
+        required: true
 
 name: release
 jobs:
-
   test:
     uses: ./.github/workflows/test.yml
 
@@ -13,7 +18,6 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-
       - uses: google-github-actions/release-please-action@v3
         id: release
         env:
@@ -24,14 +28,14 @@ jobs:
 
       - name: Check out repository
         uses: actions/checkout@v3
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created || inputs.should_release }}
 
       - run: npm publish
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created || inputs.should_release  }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
       - run: node dist/upload--to-release.cjs bin/nlterm*
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created || inputs.should_release }}
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
