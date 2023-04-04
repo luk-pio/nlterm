@@ -16,6 +16,8 @@ jobs:
 
       - uses: google-github-actions/release-please-action@v3
         id: release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           release-type: node
           package-name: test-release-please
