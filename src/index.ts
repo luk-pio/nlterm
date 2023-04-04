@@ -18,9 +18,13 @@ async function main() {
     logDebug(JSON.stringify(config, null, 2));
   }
 
+  const {apiUrl, apiKey} = config.openai;
+  if (!apiKey) {
+    throw new Error("No OpenAI API key provided. Please set the OPENAI_API_KEY environment variable.");
+  }
   const openaiApi = new OpenaiApi(
-    config.openai.apiUrl,
-    config.openai.apiKey,
+    apiUrl,
+    apiKey,
     config.debug
   );
 

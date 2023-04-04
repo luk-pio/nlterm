@@ -12,7 +12,7 @@ export const config = {
   debug: false,
   openai: {
     apiUrl: "https://api.openai.com",
-    apiKey: getEnvVariable("OPENAI_API_KEY"),
+    apiKey: process.env["OPENAI_API_KEY"],
     organization: process.env["OPENAI_ORG_ID"] || undefined,
   },
   systemMessage,
