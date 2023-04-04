@@ -43,6 +43,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
+      - run: npm run bundle
+
       - run: node dist/upload--to-release.cjs bin/nlterm*
         if: ${{ steps.release.outputs.release_created || inputs.should_release }}
         env:
