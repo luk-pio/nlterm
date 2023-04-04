@@ -17,7 +17,9 @@ async function getLatestRelease() {
     });
     return latestRelease;
   } catch (error) {
-    throw new Error(`Error getting latest release: ${JSON.stringify(error)}`);
+    throw new Error(
+      `Error getting latest release: ${error.message}`
+    );
   }
 }
 
@@ -47,9 +49,11 @@ async function uploadFilesToLatestRelease(filePaths) {
       });
     }
   } catch (error) {
-    throw new Error(`Error getting latest release: ${JSON.stringify(error)}`);
+    throw new Error(
+      `Error getting latest release: ${error.message}`
+    );
   }
 }
 
-const files = process.argv.slice(2)
+const files = process.argv.slice(2);
 uploadFilesToLatestRelease(files);
