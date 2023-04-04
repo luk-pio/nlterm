@@ -1,4 +1,3 @@
-import { config } from "../config/config";
 import { NLTError, unexpectedError, unknownError } from "../error";
 import { logDebug } from "../logDebug";
 import {
@@ -12,25 +11,20 @@ import { FetchError, safeFetch } from "../safeFetch";
 type HTTPMethod = "post" | "get";
 
 export class OpenaiApi {
-  private secretKey: string;
-  private auth: { Authorization: string };
+  private static chatCompletionUrl = "/chat/completions";
 
-  private openaiApiUrl = "https://api.openai.com/v1";
-  private chatCompletionUrl = "/chat/completions";
-
-  constructor(secretKey: string) {
-    this.secretKey = secretKey;
-    this.auth = {
-      Authorization: `Bearer ${this.secretKey}`,
-    };
-  }
+  constructor(
+    private readonly openaiApiUrl: string,
+    private readonly apiKey: string,
+    readonly debug = false
+  ) {}
 
   private async request<T, R>(
     endpoint: string,
     method: HTTPMethod,
     body: T
   ): Promise<R> {
-    if (config.debug) {
+    if (this.debug) {
       logDebug(
         `Sending request to ${
           this.openaiApiUrl + endpoint
@@ -42,7 +36,7 @@ export class OpenaiApi {
     return await safeFetch<R>(this.openaiApiUrl + endpoint, {
       method,
       headers: {
-        ...this.auth,
+        Authorization: "Bearer " + this.apiKey,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
@@ -68,7 +62,7 @@ export class OpenaiApi {
         ChatCompletionRequest,
         ChatCompletionResponse
       >(
-        this.chatCompletionUrl,
+        OpenaiApi.chatCompletionUrl,
         "post",
         this.chatCompletionRequestBody(prompt, systemMessage, config)
       );

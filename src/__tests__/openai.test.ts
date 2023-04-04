@@ -1,8 +1,6 @@
-import { OpenaiApi } from "../openai/api";
 import fetchMock from "jest-fetch-mock";
+import { OpenaiApi } from "../openai/api";
 import { ChatCompletionConfig } from "../openai/chatCompletionRequest";
-import { FetchError } from "../safeFetch";
-import { NLTError } from "../error";
 fetchMock.enableMocks();
 
 const mockResponse = {
@@ -38,7 +36,8 @@ const mockErrorResponse = {
 
 describe("OpenaiApi", () => {
   const secretKey = "test-secret-key";
-  const openaiApi = new OpenaiApi(secretKey);
+  const testUrl = "http://example.api.openai.xyz";
+  const openaiApi = new OpenaiApi(testUrl, secretKey);
   const prompt = "Test prompt";
   const systemMessage = "Test system message";
   const chatCompletionConfig: ChatCompletionConfig = {

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { config } from "./config/config";
+import { config, setDebug } from "./config/config";
 import { handleError } from "./error";
 import { logDebug } from "./logDebug";
 import { OpenaiApi } from "./openai/api";
@@ -18,7 +18,12 @@ async function main() {
     logDebug(JSON.stringify(config, null, 2));
   }
 
-  const openaiApi = new OpenaiApi(config.openai.apiKey);
+  const openaiApi = new OpenaiApi(
+    config.openai.apiUrl,
+    config.openai.apiKey,
+    config.debug
+  );
+
   const command = await openaiApi.getTerminalCommand(
     prompt,
     config.systemMessage,
@@ -26,8 +31,4 @@ async function main() {
   );
   console.log(command);
   process.exit(0);
-}
-
-function setDebug() {
-  config.debug = true;
 }
