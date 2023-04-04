@@ -12,7 +12,7 @@ export class NLTError extends Error {
 
 export function unknownError(
   cause?: Error,
-  message = "An unknown error ocurred"
+  message = "Unknown Error. Please use the --debug flag and submit an issue with the output."
 ) {
   return new NLTError(message, EXIT_CODE.UNEXPECTED_ERROR, cause);
 }
@@ -20,23 +20,11 @@ export function unknownError(
 export function unexpectedError(
   message: string,
   cause?: Error | unknown,
-  prefix = "An unexpected error occurred: "
+  prefix = "Unexpected Error: "
 ) {
   return new NLTError(
     prefix + message,
     EXIT_CODE.UNEXPECTED_ERROR,
-    cause instanceof Error ? cause : undefined
-  );
-}
-
-export function networkError(
-  message: string,
-  cause?: Error | unknown,
-  prefix = "A network error occurred: "
-) {
-  return new NLTError(
-    prefix + message,
-    EXIT_CODE.NETWORK_ERROR,
     cause instanceof Error ? cause : undefined
   );
 }

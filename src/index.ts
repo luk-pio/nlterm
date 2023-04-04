@@ -2,7 +2,7 @@
 import { config } from "./config/config";
 import { handleError } from "./error";
 import { logDebug } from "./logDebug";
-import { OpenaiApi } from "./openai/openai";
+import { OpenaiApi } from "./openai/api";
 import { parseArgs } from "./command/parseArgs";
 
 (async () => await main())().catch((error: unknown) => handleError(error));
