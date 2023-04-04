@@ -11,7 +11,7 @@ export function setDebug() {
 export const config = {
   debug: false,
   openai: {
-    apiUrl: "https://api.openai.com",
+    apiUrl: "https://api.openai.com/v1",
     apiKey: process.env["OPENAI_API_KEY"],
     organization: process.env["OPENAI_ORG_ID"] || undefined,
   },
