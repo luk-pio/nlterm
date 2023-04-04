@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       should_release:
-        description: "Should this dispatch run steps for creating a release"
+        description: "Run publish steps?"
         type: boolean
         required: true
 
@@ -37,15 +37,14 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       
       - run: npm ci
-
-      - run: npm publish
-        if: ${{ steps.release.outputs.release_created || inputs.should_release  }}
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
       - run: npm run bundle
 
       - run: node dist/upload--to-release.cjs bin/nlterm*
         if: ${{ steps.release.outputs.release_created || inputs.should_release }}
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - run: npm publish
+        if: ${{ steps.release.outputs.release_created || inputs.should_release  }}
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
