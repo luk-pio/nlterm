@@ -5,9 +5,9 @@ import { logDebug } from "./logDebug";
 import { OpenaiApi } from "./openai/api";
 import { parseArgs } from "./command/parseArgs";
 
-(async () => await main())().catch((error: unknown) => handleError(error));
-process.on("unhandledRejection", handleError);
-process.on("uncaughtException", handleError);
+(async () => await main())().catch((error: unknown) => handleError(error, config.debug));
+process.on("unhandledRejection", (error) => handleError(error, config.debug));
+process.on("uncaughtException", (error) => handleError(error, config.debug));
 process.removeAllListeners("warning");
 
 async function main() {
