@@ -2,12 +2,17 @@ import { getEnvVariable } from "./getEnvVariable";
 
 const systemMessage = `I want you to translate my prompts to terminal commands. I will provide you with a prompt and I want you to answer with a command which I can run in the terminal. You should only reply with the terminal command and nothing else. Do not write explanations. Do not format the command in a code block. My prompt is: `;
 
-const MAX_TOKENS = 2048
+const MAX_TOKENS = 2048;
+
+export function setDebug() {
+  config.debug = true;
+}
 
 export const config = {
   debug: false,
   openai: {
-    apiKey: getEnvVariable("OPENAI_API_KEY"),
+    apiUrl: "https://api.openai.com/v1",
+    apiKey: process.env["OPENAI_API_KEY"],
     organization: process.env["OPENAI_ORG_ID"] || undefined,
   },
   systemMessage,

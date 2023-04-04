@@ -23,6 +23,15 @@ export interface ChatCompletionResponse {
   };
 }
 
+export interface OpenaiApiError {
+  error: {
+    message: string,
+    type: string,
+    param: string | null,
+    code: string
+  }
+}
+
 type Role = "user" | "assistant" | "system";
 
 interface Choice {

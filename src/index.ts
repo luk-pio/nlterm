@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-import { config } from "./config/config";
+import { config, setDebug } from "./config/config";
 import { handleError } from "./error";
 import { logDebug } from "./logDebug";
-import { OpenaiApi } from "./openai/openai";
+import { OpenaiApi } from "./openai/api";
 import { parseArgs } from "./command/parseArgs";
 
-(async () => await main())().catch((error: unknown) => handleError(error));
-process.on("unhandledRejection", handleError);
-process.on("uncaughtException", handleError);
+(async () => await main())().catch((error: unknown) => handleError(error, config.debug));
+process.on("unhandledRejection", (error) => handleError(error, config.debug));
+process.on("uncaughtException", (error) => handleError(error, config.debug));
 process.removeAllListeners("warning");
 
 async function main() {
@@ -18,7 +18,16 @@ async function main() {
     logDebug(JSON.stringify(config, null, 2));
   }
 
-  const openaiApi = new OpenaiApi(config.openai.apiKey);
+  const {apiUrl, apiKey} = config.openai;
+  if (!apiKey) {
+    throw new Error("No OpenAI API key provided. Please set the OPENAI_API_KEY environment variable.");
+  }
+  const openaiApi = new OpenaiApi(
+    apiUrl,
+    apiKey,
+    config.debug
+  );
+
   const command = await openaiApi.getTerminalCommand(
     prompt,
     config.systemMessage,
@@ -26,8 +35,4 @@ async function main() {
   );
   console.log(command);
   process.exit(0);
-}
-
-function setDebug() {
-  config.debug = true;
 }
