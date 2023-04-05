@@ -5,7 +5,7 @@
 
 ### Features
 
-* loosen node requirements to 14 ([67add86](https://github.com/luk-pio/nlterm/commit/67add86be16317a880b6698743901b94451ee759))
+* loosen node requirements to >=14 ([67add86](https://github.com/luk-pio/nlterm/commit/67add86be16317a880b6698743901b94451ee759))
 
 ## [0.4.0](https://github.com/luk-pio/nlterm/compare/v0.3.0...v0.4.0) (2023-04-04)
 
