@@ -4,11 +4,11 @@
 
 ## Table of Contents
 
-* [Prerequisites](#---prerequisites)
-* [Installation](#----installation)
-* [Usage](#---usage)
-* [Enabling Globally](#---enabling-globally)
-* [Executing terminal commands](#------executing-terminal-commands)
+* [Table of Contents](#table-of-contents)
+* [Prerequisites](#prerequisites)
+* [Installation](#installation)
+* [Usage](#usage)
+  + [Executing the commands](#executing-the-commands)
 * [Setting the API Key](#setting-the-api-key)
 * [Examples](#examples)
 * [Contributing](#contributing)
@@ -22,11 +22,18 @@ See [Setting the API Key](#setting-the-api-key) for more information.
 
 ## Installation
 
-Simply download one of the binaries from the release page or install as a global npm package: 
-(requires node 18)
+You have two options:
+
+1. Install it globally using npm:
 ```bash
 npm i -g nlterm
 ```
+
+2. Pull the repository and run: 
+```bash
+npm run build
+```
+This will output a binary for your system (currently supported for  linux and macos) to the `bin` directory, which you can then add to a location in your PATH.
 
 ## Usage
 
@@ -54,14 +61,6 @@ If you want to execute the translated terminal command, you can add the followin
 nlt() {
   source <(nlterm $1)
 }
-```
-
-## Enabling Globally
-If you want the command to be available globally, you can move the binary to a directory that's in your `PATH` environment variable.
-For example, `~/.local/bin`:
-
-```bash
-mv nlterm ~/.local/bin
 ```
 
 ## Setting the API Key
