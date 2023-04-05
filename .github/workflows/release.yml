@@ -37,12 +37,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       
       - run: npm ci
-      - run: npm run bundle
-
-      - run: node ci/upload--to-release.js bin/nlterm*
-        if: ${{ steps.release.outputs.release_created || inputs.should_release }}
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - run: npm publish
         if: ${{ steps.release.outputs.release_created || inputs.should_release  }}

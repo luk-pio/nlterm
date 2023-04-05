@@ -1,7 +1,8 @@
 import fetchMock from "jest-fetch-mock";
+fetchMock.enableMocks();
+
 import { OpenaiApi } from "../openai/api";
 import { ChatCompletionConfig } from "../openai/chatCompletionRequest";
-fetchMock.enableMocks();
 
 const mockResponse = {
   id: "chatcmpl-123",

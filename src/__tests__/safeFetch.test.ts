@@ -1,6 +1,7 @@
 import fetchMock from "jest-fetch-mock";
-import { safeFetch } from "../safeFetch";
 fetchMock.enableMocks();
+
+import { safeFetch } from "../safeFetch";
 
 describe("safeFetch", () => {
   const testUrl = "https://api.example.com/data";

@@ -20,16 +20,15 @@
     "url": "https://github.com/luk-pio/nlterm/issues"
   },
   "type": "module",
-  "main": "dist/index.cjs",
+  "main": "dist/nlterm.cjs",
   "bin": {
-    "nlterm": "dist/index.cjs"
+    "nlterm": "dist/nlterm.cjs"
   },
   "scripts": {
-    "start": "npm run build && node dist/index.js",
-    "bundle": "npm run clean && rollup -c && chmod u+x dist/index.cjs",
-    "watch": "rollup -c -w",
+    "bundle": "npm run clean && rollup -c && chmod u+x dist/nlterm.cjs",
     "build": "npm run bundle && mkdir -p bin && pkg -t node18-linux-arm64,node18-linux-x64,node18-macos-arm64,node18-macos-x64 package.json -C -o bin/nlterm --no-bytecode",
-    "clean": "rm -rf dist bin",
+    "clean": "rm -rf dist bin coverage",
+    "prepare": "npm run bundle",
     "lint": "eslint src",
     "test": "jest",
     "test:coverage": "jest --collectCoverage"
@@ -49,6 +48,7 @@
     "@types/jest": "^29.5.0",
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.15.11",
+    "@types/node-fetch": "^2.6.3",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
     "eslint": "^8.37.0",
@@ -67,6 +67,6 @@
     "linux"
   ],
   "engines": {
-    "node": "~18"
+    "node": ">=14"
   }
 }

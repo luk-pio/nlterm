@@ -4,11 +4,11 @@
 
 ## Table of Contents
 
-* [Prerequisites](#---prerequisites)
-* [Installation](#----installation)
-* [Usage](#---usage)
-* [Enabling Globally](#---enabling-globally)
-* [Executing terminal commands](#------executing-terminal-commands)
+* [Table of Contents](#table-of-contents)
+* [Prerequisites](#prerequisites)
+* [Installation](#installation)
+* [Usage](#usage)
+  + [Executing the commands](#executing-the-commands)
 * [Setting the API Key](#setting-the-api-key)
 * [Examples](#examples)
 * [Contributing](#contributing)
@@ -16,16 +16,24 @@
 
 ## Prerequisites
 
-Before you start, you'll need to obtain an OpenAI API key 🔐. You can get one by visiting this URL: https://platform.openai.com/account/api-keys
+- node >= 14
+- An OpenAI API key 🔐. You can get one by visiting this URL: https://platform.openai.com/account/api-keys
 See [Setting the API Key](#setting-the-api-key) for more information.
 
 ## Installation
 
-Simply download one of the binaries from the release page or install as a global npm package: 
-(requires node 18)
+You have two options:
+
+1. Install it globally using npm:
 ```bash
 npm i -g nlterm
 ```
+
+2. Pull the repository and run: 
+```bash
+npm run build
+```
+This will output a binary for your system (currently supported for  linux and macos) to the `bin` directory, which you can then add to a location in your PATH.
 
 ## Usage
 
@@ -43,15 +51,7 @@ Flags:
 -h, --help:   Prints the help docs
 ```
 
-## Enabling Globally
-If you want the command to be available globally, you can move the binary to a directory that's in your `PATH` environment variable.
-For example, `~/.local/bin`:
-
-```bash
-mv nlterm ~/.local/bin
-```
-
-## Executing terminal commands
+### Executing the commands
 
 If you want to execute the translated terminal command, you can add the following shell function to your shell profile file (`~/.bashrc`, `~/.bash_profile`, or `~/.zshrc`):
 
@@ -67,17 +67,16 @@ nlt() {
 
 In order to use `nlterm`, you'll need to set your OpenAI API key as an environment variable in your shell environment. Here's how:
 
-1. Open your terminal.
-2. Open your shell profile file (usually `~/.bashrc`, `~/.bash_profile`, or `~/.zshrc`) in a text editor.
-3. Add the following line at the end of the file:
+1. Open your shell profile file (usually `~/.bashrc`, `~/.bash_profile`, or `~/.zshrc`) in a text editor.
+2. Add the following line at the end of the file:
 ```bash
 export OPENAI_API_KEY="your_api_key"
 ```
 
 Replace `your_api_key` with your actual API key obtained from OpenAI 🔑.
 
-4. Save and close the file.
-5. Restart your terminal or run `source ~/.bashrc`, `source ~/.bash_profile`, or `source ~/.zshrc`, depending on which file you edited.
+3. Save and close the file.
+4. Restart your terminal or run `source ~/.bashrc`, `source ~/.bash_profile`, or `source ~/.zshrc`, depending on which file you edited.
 
 ## Examples
 
