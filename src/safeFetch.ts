@@ -1,3 +1,4 @@
+import fetch, { RequestInit, Response } from "node-fetch";
 import { config } from "./config/config";
 import { logDebug } from "./logDebug";
 

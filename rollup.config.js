@@ -5,10 +5,10 @@ import json from "@rollup/plugin-json";
 import shebang from 'rollup-plugin-preserve-shebang';
 
 export default {
-  input: "src/index.ts",
+  input: "src/nlterm.ts",
   output: [
     {
-      file: "dist/index.cjs",
+      file: "dist/nlterm.cjs",
       format: "cjs",
       sourcemap: true,
     },
