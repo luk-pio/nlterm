@@ -25,10 +25,12 @@ jobs:
         with:
           release-type: node
           package-name: test-release-please
+    outputs:
+      release_created: release.outputs.release_created
 
   publish:
-    needs: test
-    if: ${{ steps.release.outputs.release_created || inputs.should_release }}
+    needs: release
+    if: needs.release.outputs.release_created || inputs.should_release
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
