@@ -60,8 +60,25 @@ If you want to execute the translated terminal command, you can add the followin
 > ⚠️ **This will execute arbitrary code written by an AI in your shell environment** 💀 Who knows what it's thinking. Use with caution.
 
 ```bash
-nlt() {
-  source <(nlterm $1)
+function nltermx() {
+    if [[ -z "$1" ]]; then
+        nlterm -h
+        exit 1
+    fi
+
+    result=$(nlterm "$1")
+
+    echo "$result"
+    echo
+    echo -n "Execute? (y/n): "
+    read -r answer
+
+    if [[ "$answer" == "y" ]]; then
+        source <(echo "$result")
+    else
+        echo "Aborted."
+        exit 0
+    fi
 }
 ```
 
