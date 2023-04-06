@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/luk-pio/nlterm/compare/v0.5.0...v0.5.1) (2023-04-06)
+
+
+### Bug Fixes
+
+* add npm-shrinkwrap with lockfile version 2 for backwards compatibility ([8136031](https://github.com/luk-pio/nlterm/commit/81360319005b01c95d5143f50677525d9f349489))
+
 ## [0.5.0](https://github.com/luk-pio/nlterm/compare/v0.4.0...v0.5.0) (2023-04-05)
 
 
