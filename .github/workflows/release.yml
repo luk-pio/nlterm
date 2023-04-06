@@ -26,21 +26,22 @@ jobs:
           release-type: node
           package-name: test-release-please
 
+  publish:
+    needs: test
+    if: ${{ steps.release.outputs.release_created || inputs.should_release }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Check out repository
         uses: actions/checkout@v3
-        if: ${{ steps.release.outputs.release_created || inputs.should_release }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          registry-url: 'https://registry.npmjs.org'
-        if: ${{ steps.release.outputs.release_created || inputs.should_release }}
-      
+          registry-url: "https://registry.npmjs.org"
+
       - run: npm ci
-        if: ${{ steps.release.outputs.release_created || inputs.should_release }}
 
       - run: npm publish
-        if: ${{ steps.release.outputs.release_created || inputs.should_release  }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
