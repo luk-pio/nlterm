@@ -2,6 +2,8 @@
 
 `nlterm` is a command-line tool that translates natural language descriptions into terminal commands. Just tell it what you want to do in plain English, and watch it unleash the power of OpenAI to turn your words into executable commands. It's like having an AI-powered rubber duck 🦆.
 
+![nlterm demo screencast](assets/nlterm.gif)
+
 ## Table of Contents
 
 * [Table of Contents](#table-of-contents)
