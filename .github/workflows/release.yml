@@ -35,8 +35,10 @@ jobs:
         with:
           node-version: 18
           registry-url: 'https://registry.npmjs.org'
+        if: ${{ steps.release.outputs.release_created || inputs.should_release }}
       
       - run: npm ci
+        if: ${{ steps.release.outputs.release_created || inputs.should_release }}
 
       - run: npm publish
         if: ${{ steps.release.outputs.release_created || inputs.should_release  }}
